@@ -1,35 +1,55 @@
-html {
-  font-size: 12px;
-}
-body {
-  font-family: "Noto Sans", sans-serif;
-  font-weight: 400;
-  font-color: pink
-}
-body.main
-  background-image: url("C:\Users\justi\api_temp\images");
-  background-size: cover;
-  background-position: center;
-}
-.temperature-content {
-  display: flex;               
-  gap: 5rem;
-  align-content: center;
-}
-.temperature-content {
-  font-family: "Noto Sans", sans-serif;
-  font-weight: 600;  
-  font-color: pink        
+body{
+    background-color: rgba(204, 220, 178, 0.882);
+    font-family: "Google Sans", sans-serif;
+    font-size: 1.6rem;
 }
 
-.weather-page-layout {
+/* Title, image, button styling */
+.header-container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center; /* vertically align if needed */
+  margin-top:1em;
+  gap: 8em; /* space between items */
+}
+
+.header-left {
+    display: flex;
+    flex-direction: column;
+}
+
+.header-image {
+    width: 40rem; /* about 320px */
+    height: auto;
+}
+
+
+h1,h2, #buttonClick {
+    color:rgb(71, 112, 110);
+}
+
+#weatherDisplay{
+    color:rgb(36, 112, 109);
+    margin-left:1em ;
+    font-weight: 400px;
+
+}
+
+/button */
+
+#getWeather, #forecastBtn{
+    font-size:1.4rem;
+    border-radius: 8px;
+    border-color: rgb(0, 183, 255);
+    transition: background-color 0.3s ease;
+}
+
+
+/* 7 day weather forecast display */
+
+#forecastContainer{
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  grid-template-rows: auto 1fr auto 1fr
-  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  padding: 20px;
 }
-.weather-page-layout .header-block {
-  grid-column: 1 / -1;     
-  grid-row: 1;
-}
-
