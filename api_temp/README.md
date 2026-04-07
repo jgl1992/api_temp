@@ -12,9 +12,7 @@ Instead of displaying raw API data, this project transforms it into:
 
 - Temp Cards 
 - Condition Cards
-gi
-Each server response is mapped to original fictional entities to create an alternative paradise.
-
+  
 ---
 
 #Stack
