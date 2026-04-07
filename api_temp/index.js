@@ -26,3 +26,4 @@ button.addEventListener("click", function () {
             weatherSection.innerHTML = "<p>Unable to load weather data.</p>";
         });
 });
+*/change/*
