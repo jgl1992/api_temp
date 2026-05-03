@@ -1,29 +1,43 @@
-/* pushing my buttons */
 const button = document.getElementById("getWeather");
 const weatherSection = document.getElementById("weatherDisplay");
 
-/* click button - Today's Forecast */
-button.addEventListener("click", function () {
+async function getWeather(latitude, longitude) {
+  const url =
+    `https://api.open-meteo.com/v1/forecast` +
+    `?latitude=${latitude}` +
+    `&longitude=${longitude}` +
+    `&current=temperature_2m,apparent_temperature,weather_code,relative_humidity_2m,wind_speed_10m` +
+    `&temperature_unit=celsius` +
+    `&timezone=auto`;
 
-    fetch("https://api.open-meteo.com/v1/forecast?latitude=29.76&longitude=-95.36&current=temperature_2m,apparent_temperature,weather_code,relative_humidity_2m,wind_speed_10m&temperature_unit=celsius&timezone=auto")
-        .then(response => response.json())
-        .then(data => {
-            console.log("Current Weather:", data);
+  try {
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
 
-            const current = data.current;
+    const data = await response.json();
+    console.log("Current weather:", data);
+    return data;
+  } catch (error) {
+    console.error("Error fetching weather:", error.message);
+    return null;
+  }
+}
 
-            weatherSection.innerHTML = `
-                <h2>Current Weather</h2>
-                <p><strong>Temperature:</strong> ${current.temperature_2m}°C</p>
-                <p><strong>Feels Like:</strong> ${current.apparent_temperature}°C</p>
-                <p><strong>Humidity:</strong> ${current.relative_humidity_2m}%</p>
-                <p><strong>Wind Speed:</strong> ${current.wind_speed_10m} km/h</p>
-                <p><strong>Weather Code:</strong> ${current.weather_code}</p>
-            `;
-        })
-        .catch(error => {
-            console.error("Error fetching weather:", error);
-            weatherSection.innerHTML = "<p>Unable to load weather data.</p>";
-        });
+  const c = data.current;
+
+  weatherSection.innerHTML = `
+    <h2>Weather</h2>
+    <p><strong>Temperature:</strong> ${c.temperature_2m}°C</p>
+    <p><strong>Condition:</strong> ${describeWeather(c.weather_code)}</p>
+  `;
+}
+button.addEventListener("click", async () => {
+  weatherSection.innerHTML = "<p>Loading…</p>";
+  const latitude  = 29.76;
+  const longitude = -95.36;
+
+  const data = await getWeather(latitude, longitude);
+  renderWeather(data);
 });
-*/change/*
