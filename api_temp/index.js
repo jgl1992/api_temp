@@ -1,10 +1,6 @@
-// ───────── Grab DOM elements ─────────
 const button         = document.getElementById("getWeather");
 const weatherSection = document.getElementById("weatherDisplay");
-
-// ───────── WMO weather code → readable description ─────────
 const WMO_CODES = {
-
   0:  { description: "Clear sky", icon: "☀️" },
   1:  { description: "Mainly clear", icon: "🌤️" },
   2:  { description: "Partly cloudy", icon: "⛅" },
@@ -36,12 +32,10 @@ const WMO_CODES = {
 };
 
 };
-
 function describeWeather(code) {
   return WMO_CODES[code] || `Unknown condition (code ${code})`;
 }
 
-// ───────── Fetch weather from Open-Meteo ─────────
 async function getWeather(latitude, longitude) {
   const url =
     `https://api.open-meteo.com/v1/forecast` +
