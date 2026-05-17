@@ -1,6 +1,6 @@
-*/new commit Compass/*
-const button         = document.getElementById("getWeather");
+const button = document.getElementById("getWeather");
 const weatherSection = document.getElementById("weatherDisplay");
+
 const WMO_CODES = {
   0:  { description: "Clear sky", icon: "☀️" },
   1:  { description: "Mainly clear", icon: "🌤️" },
@@ -32,9 +32,9 @@ const WMO_CODES = {
   99: { description: "Thunderstorm with heavy hail", icon: "⛈️" }
 };
 
-};
 function describeWeather(code) {
-  return WMO_CODES[code] || `Unknown condition (code ${code})`;
+  const entry = WMO_CODES[code];
+  return entry ? `${entry.icon} ${entry.description}` : `Unknown condition (code ${code})`;
 }
 
 async function getWeather(latitude, longitude) {
@@ -56,13 +56,13 @@ async function getWeather(latitude, longitude) {
     const data = await response.json();
     console.log("Current weather:", data);
     return data;
+
   } catch (error) {
     console.error("Error fetching weather:", error.message);
     return null;
   }
 }
 
-// ───────── Render to the page ─────────
 function renderWeather(data) {
   if (!data || !data.current) {
     weatherSection.innerHTML = "<p>Unable to load weather data.</p>";
@@ -74,15 +74,16 @@ function renderWeather(data) {
   weatherSection.innerHTML = `
     <h2>Current Weather</h2>
     <p><strong>Temperature:</strong> ${c.temperature_2m}°C</p>
+    <p><strong>Feels Like:</strong> ${c.apparent_temperature}°C</p>
     <p><strong>Condition:</strong> ${describeWeather(c.weather_code)}</p>
+    <p><strong>Humidity:</strong> ${c.relative_humidity_2m}%</p>
+    <p><strong>Wind:</strong> ${c.wind_speed_10m} km/h</p>
   `;
 }
 
-// ───────── Wire up the button ─────────
 button.addEventListener("click", async () => {
   weatherSection.innerHTML = "<p>Loading…</p>";
 
-  // Houston, TX coordinates (change as you like)
   const latitude  = 29.76;
   const longitude = -95.36;
 
