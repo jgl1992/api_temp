@@ -1,4 +1,4 @@
-*/new commit Crow/*
+*/new commit Compass/*
 const button         = document.getElementById("getWeather");
 const weatherSection = document.getElementById("weatherDisplay");
 const WMO_CODES = {
